@@ -2,7 +2,7 @@
 function App() {
   return(
     <>
-      <h1>Expenses Control</h1>
+      <h1 className="text-6xl">Expenses Control</h1>
     </>
   )
 }
