@@ -17,10 +17,20 @@ export type BudgetState = {
     editingId: Expense['id']
 }
 
+const initialBudget = () : number => {
+    const localStorageBudget = localStorage.getItem('budget')
+    return localStorageBudget ? +localStorageBudget : 0
+}
+
+const localStorageExpenses = () : Expense[] => {
+    const localStorageExpenses = localStorage.getItem('expenses')
+    return localStorageExpenses ? JSON.parse(localStorageExpenses) : []
+}
+
 export const initialState : BudgetState = {
-    budget : 0,
+    budget : initialBudget(),
     modal: false,
-    expenses: [],
+    expenses: localStorageExpenses(),
     editingId: ''
 }
 
@@ -91,7 +101,6 @@ export const budgetReducer = (
             expenses: state.expenses.map(expense => expense.id === action.payload.expense.id ? action.payload.expense : expense),
             modal: false,
             editingId: ''
-
         }
     }
 
